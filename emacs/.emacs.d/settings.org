@@ -1,0 +1,193 @@
+#+TITLE: Literate Emacs Config Wriiten in Org Mode
+#+AUTHOR: Brody Lamb
+#+EMAIL: brody.lamb30@gmail.com
+  
+* Preface
+  This is a literate emacs config, written in org mode.
+  An effort has been made to make this file as concise
+  and easy to navigate as possible. Options are able to
+  be toggled, as well as packages changed or removed.
+  
+  This config was made with great +thievery+ inspiration from [[https://github.com/daviwil/emacs-from-scratch/blob/master/init.el][emacs-from-scratch]].
+
+  Plenty of this config isn't done, nor is it set up to my liking.
+  Any heading with the tag *:REFACTOR:* is subject for the code segments to
+  be refactored. Obviously headings labelled *TODO* aren't finished.
+  
+* Package Repositories
+  #+begin_src emacs-lisp
+    (require 'package)
+    ;; Sets a list of package archive mirrors
+    (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+			     ("melpa" . "https://melpa.org/packages/")
+			     ("org" . "https://orgmode.org/elpa/")
+			     ("elpa" . "https://elpa.gnu.org/packages/")))
+    (package-initialize)
+
+    ;; Keep packages up to date.
+    (unless package-archive-contents
+      (package-refresh-contents))
+
+    ;; Use-package is a clean macro for package installing and configuration.
+    (unless (package-installed-p 'use-package)
+      (package-install 'use-package))
+
+    (require 'use-package)
+  #+end_src
+  
+* General UI
+** Default UI Features
+   This section is about the UI features which are built-in
+    To Emacs.
+   
+    We start with things that I think get in the way, such as
+    the scroll bar,tool bar, and menu bar.
+   
+    Disabling line truncating and enabling word wrap makes long lines
+    easier to look at than left as stock.
+   
+   #+begin_src emacs-lisp
+     (scroll-bar-mode -1)
+     (menu-bar-mode -1) 
+     (tool-bar-mode -1)
+     (column-number-mode 1)
+     (delete-selection-mode)
+     (setq-default truncate-lines 1)
+     (setq-default word-wrap 1)
+     ;(setq split-window-preferred-function 'split-window-horizontally)
+
+     ;; C indenting
+     (setq c-default-style "linux"
+	   c-basic-offset 4)
+   #+end_src
+** Mode Line
+   [[https://github.com/jessiehildebrandt/mood-line][mood-line]] is a clean, minimal mode line that supposedly
+   is similar to doom-modeline.
+   
+   #+begin_src emacs-lisp
+     (defconst *mood-line* "~/.emacs.d/mood-line.el")
+     (load-file *mood-line*)
+     (mood-line-mode)
+   #+end_src
+   
+** Theme and Text Font
+   Two custom themes are currently installed:
+   1. [[https://github.com/bbatsov/zenburn-emacs][Zenburn]] (which is probably on right now)
+   2. [[https://github.com/donderom/jazz-theme][Jazz]]
+      
+   Jazz is very dark, almost to an unreadable extent.
+   It's staying because it can probably be used effectively at night.
+   Both of these themes are cloned because again, the less MELPA, the better.
+   
+   The font currently being used is [[ttps://github.com/belluzj/fantasque-sans][Fantasque Sans Mono]]. I like this font.
+   
+   #+begin_src emacs-lisp
+     (defconst *theme-directory* "~/.emacs.d/themes/")
+
+     (add-to-list 'custom-theme-load-path *theme-directory*)
+     (load-theme 'zenburn t)
+     (set-frame-font "Fantasque Sans Mono 16" nil t)
+   #+end_src
+      
+** Fuzzy Matching
+   #+begin_src emacs-lisp
+     (use-package selectrum
+       :ensure t
+       :config (selectrum-mode 1))
+     
+     (use-package selectrum-prescient
+       :ensure t)
+     (selectrum-prescient-mode 1)
+     (prescient-persist-mode 1)
+   #+end_src
+** Keybinding Assistance
+   "Which key" is used to see keybindings because
+   emacs has millions.
+
+   If a command is not executed within a second, the
+   help window displays. The only exception is the help
+   prefix (C-h).
+   
+   #+begin_src emacs-lisp
+     (use-package which-key
+       :ensure t)
+     (setq which-key-show-early-on-C-h 1)
+     (setq which-key-idle-delay 0.5)
+     (setq which-key-idle-secondary-delay 0.05)
+     (which-key-setup-minibuffer)
+     (which-key-setup-side-window-bottom)
+     (setq which-key-popup-type 'minibuffer)
+     (which-key-mode)
+   #+end_src
+   
+*** Miscellaneous
+   I don't know where else to put these.
+   The emacs startup screen is annoying and shouldn't show up.
+   
+   #+begin_src emacs-lisp
+     (setq inhibit-startup-message t)
+   #+end_src
+   
+* TODO Modes
+** TODO Org Mode
+   Now this is meta...
+  
+   #+begin_src emacs-lisp
+      (add-hook 'org-mode-hook
+		(lambda () (visual-line-mode)))
+
+     (setq org-agenda-files (directory-files-recursively "~/org/" "\\.org$"))
+
+; Targets include this file and any file contributing to the agenda - up to 9 levels deep
+(setq org-refile-targets (quote ((nil :maxlevel . 9))))
+     
+     (setq org-support-shift-select t)
+     (setq org-ellipsis " ▾")
+     (set-face-underline 'org-ellipsis nil)
+   #+end_src
+   
+** TODO Programming Modes
+*** General
+    #+begin_src emacs-lisp
+      (use-package lsp-mode
+	:ensure t
+	:config (setq lsp-keymap-prefix "C-l"))
+
+      (use-package lsp-ui
+	:ensure t)
+
+      (use-package flycheck
+	:ensure t)
+
+      (use-package company
+	:ensure t
+	:config (setq company-idle-delay 0.01))
+
+      (add-hook 'prog-mode-hook
+		(lambda () (progn (display-line-numbers-mode t)
+				  (hs-minor-mode t)
+				  (setq display-line-numbers-type 'relative))))
+    #+end_src
+*** LISP
+
+    #+begin_src emacs-lisp
+      (use-package slime :ensure)
+      (use-package slime-company :ensure)
+      (setq inferior-lisp-program "/usr/local/bin/sbcl --noinform")
+      (slime-setup '(slime-fancy slime-company))
+    #+end_src
+
+*** C/C++
+    #+begin_src emacs-lisp
+      (add-hook 'c-mode-hook
+		(lambda () (progn (lsp-deferred)
+				  (flycheck-mode t)
+				  (company-mode t))))
+
+      (add-hook 'c++-mode-hook
+		(lambda () (progn (lsp-deferred)
+				  (flycheck-mode t)
+				  (company-mode t))))
+    #+end_src
+    
+    

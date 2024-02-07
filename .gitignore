@@ -1,0 +1,10 @@
+# Emacs downloaded things, plus other user data
+emacs/.emacs.d/elpa
+emacs/.emacs.d/var
+emacs.emacs.d/eshell
+emacs/.emacs.d/auto-save-list
+
+# Neovim downloaded packages and user data
+nvim/.config/nvim/spell
+nvim/.config/nvim/lazy-lock.json
+
