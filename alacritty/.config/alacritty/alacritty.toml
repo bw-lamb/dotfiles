@@ -1,0 +1,28 @@
+# themes from https://github.com/alacritty/alacritty-theme
+
+import = ["~/.config/alacritty/themes/themes/zenburn.toml"]
+
+[shell]
+program = "/bin/bash"
+args = ["-l"]
+
+[cursor.style]
+shape = "Block"
+blinking = "On"
+
+[font]
+size = 14
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+
+[window]
+startup_mode = "Maximized"
+decorations = "none"
+
+[window.padding]
+x = 7
+y = 0
+
+[mouse]
+hide_when_typing = true
