@@ -1,3 +1,8 @@
+# I don't like typing 'nvim'
+alias v='nvim'
+
+# Gets the name of the current branch
+# If we aren't in a branch, nothing is returned, and an error shows up, which is just sent to null.
 function get_git_branch() {
 	branch=$(git branch --show-current 2>/dev/null)
 	
