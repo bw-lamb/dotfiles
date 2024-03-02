@@ -1,3 +1,6 @@
+# Use my scripts
+PATH=$PATH:~/script
+
 # I don't like typing 'nvim'
 alias v='nvim'
 
