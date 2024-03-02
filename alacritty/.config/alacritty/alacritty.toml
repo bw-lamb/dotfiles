@@ -3,8 +3,9 @@
 import = ["~/.config/alacritty/themes/themes/zenburn.toml"]
 
 [shell]
-program = "/bin/bash"
-args = ["-l"]
+program = "/usr/local/bin/tmux"
+#program = "/bin/bash"
+#args = ["-l"]
 
 [cursor.style]
 shape = "Block"
