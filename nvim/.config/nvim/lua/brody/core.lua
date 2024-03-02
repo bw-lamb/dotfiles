@@ -4,6 +4,9 @@ vim.opt.list = false
 vim.opt.relativenumber = true
 vim.opt.textwidth = 100
 
+-- set <leader> to space
+vim.g.mapleader = ' '
+
 -- set whichwrap+=<,>,h,l
 vim.opt.whichwrap[#vim.opt.whichwrap + 1]="<"
 vim.opt.whichwrap[#vim.opt.whichwrap + 1]=">"
