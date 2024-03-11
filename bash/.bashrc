@@ -2,7 +2,7 @@
 PATH=$PATH:~/script
 
 # zettelkasten path. This will probably be useful.
-SECOND_BRAIN="$HOME/second-brain/"
+SECOND_BRAIN="$HOME/second-brain"
 
 # I don't like typing 'nvim'
 alias v='nvim'
