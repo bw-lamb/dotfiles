@@ -3,6 +3,7 @@ emacs/.emacs.d/elpa
 emacs/.emacs.d/var
 emacs.emacs.d/eshell
 emacs/.emacs.d/auto-save-list
+emacs/.emacs.d/.lsp-session*
 
 # Neovim downloaded packages and user data
 nvim/.config/nvim/spell
