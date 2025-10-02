@@ -2,7 +2,7 @@ vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.list = false 
 vim.opt.relativenumber = true
-vim.opt.textwidth = 100
+vim.opt.textwidth = 180
 
 -- set <leader> to space
 vim.g.mapleader = ' '
@@ -15,4 +15,5 @@ vim.opt.whichwrap[#vim.opt.whichwrap + 1]="l"
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+
 vim.cmd.colorscheme("zenburn")
