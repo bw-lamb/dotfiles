@@ -6,6 +6,8 @@ vim.opt.textwidth = 180
 
 -- set <leader> to space
 vim.g.mapleader = ' '
+-- set <localleader>, also to space. This shouldn't be a problem?
+vim.g.maplocalleader = ' '
 
 -- set whichwrap+=<,>,h,l
 vim.opt.whichwrap[#vim.opt.whichwrap + 1]="<"
