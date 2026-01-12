@@ -1,28 +1,20 @@
 ## Dotfile Library
 
-A central library for all of my configuration files. Instead of floating in my home directory, symlinks are pointed to the files in this folder. Not being in `$HOME`, git can reasonably be used, allowing me to roll back files when I ~~inevitably~~ accidentally blow them up.
+A central library for all of my configuration files. Instead of floating in my home directory, symlinks are pointed to the files in this folder.
 
-### Requirements
+### Dependencies
 - `git`
 - `stow`
 
 Both of these are available for virtually every system under the sun.
 
-On Mac, these can be installed easily using `brew`:
-
-```
-$ brew install git stow
-```
-
 ### Usage
 
-Place configuration files within the `dotfiles/` folder in the same hierarchy as you would in your `$HOME` directory. For example, a file in `$HOME/.config/` would be placed in `dotfiles/{SUBFOLDER}/.config`, where `SUBFOLDER` is an arbitrary name.
+Place configuration files within the `dotfiles/` folder in the same hierarchy as you would in your `$HOME` directory. For example, a file in `$HOME/.config/` would be placed in `dotfiles/{SUBFOLDER}/.config`.
 
-
-Then, invoke `stow` on all the subfolders:
-
+To 'install' a configuration, just call stow in that subfolder by `stow <config>'
+Or, do everything at once with a glob:
 ```
 $ cd dotfiles
-$ stow */
+$ stow *
 ```
-
