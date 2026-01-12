@@ -12,7 +12,7 @@ Both of these are available for virtually every system under the sun.
 
 Place configuration files within the `dotfiles/` folder in the same hierarchy as you would in your `$HOME` directory. For example, a file in `$HOME/.config/` would be placed in `dotfiles/{SUBFOLDER}/.config`.
 
-To 'install' a configuration, just call stow in that subfolder by `stow <config>'
+To 'install' a configuration, just call stow in that subfolder by `stow <config>`
 Or, do everything at once with a glob:
 ```
 $ cd dotfiles
