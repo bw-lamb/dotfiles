@@ -23,14 +23,17 @@
 * UI Features
 
 #+begin_src emacs-lisp
-   (scroll-bar-mode -1)
-   (menu-bar-mode -1) 
-   (tool-bar-mode -1)
-   (column-number-mode 1)
-   (delete-selection-mode)
-   (setq-default truncate-lines 1)
-   (setq-default word-wrap 1)
-   ;(setq split-window-preferred-function 'split-window-horizontally)
+  ;; Automatically detect file updates
+  (global-auto-revert-mode t)
+
+  (scroll-bar-mode -1)
+  (menu-bar-mode -1) 
+  (tool-bar-mode -1)
+  (column-number-mode 1)
+  (delete-selection-mode)
+  (setq-default truncate-lines 1)
+  (setq-default word-wrap 1)
+                                          ;(setq split-window-preferred-function 'split-window-horizontally)
  #+end_src
 
 * Theme and Font
@@ -136,4 +139,21 @@
     :ensure t
     :config
     (add-hook 'go-mode-hook #'eglot))
+#+end_src
+* PDF Viewing/Editing
+#+begin_src emacs-lisp
+  (use-package pdf-tools
+    :ensure t
+    :config
+    (pdf-tools-install))
+#+end_src
+* LaTeX
+#+begin_src emacs-lisp
+  (use-package auctex
+    :ensure t
+    :config
+    (setq TeX-auto-save t)
+    (setq TeX-parse-self t)
+    (setq-default TeX-master nil)
+    (prettify-symbols-mode))
 #+end_src
