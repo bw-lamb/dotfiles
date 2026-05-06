@@ -44,7 +44,8 @@
   (add-to-list 'custom-theme-load-path *theme-directory*)
   (load-theme 'zenburn t)
 
-  (set-frame-font "Hack Nerd Font Mono" nil t)
+  (set-frame-font "Jetbrains Mono-11" nil t)
+  (global-font-lock-mode 1) ; ??
 #+end_src
 
 * Keybinds
@@ -110,14 +111,22 @@
 
 * Programming Modes
 #+begin_src emacs-lisp
-  (use-package eglot
+  (use-package flycheck
     :ensure t)
 
-  (use-package flycheck
+  (use-package flymake
     :ensure t)
 
   (use-package company
     :ensure t)
+
+    (use-package eglot
+    :ensure t)
+#+end_src
+
+** C
+#+begin_src emacs-lisp
+  (add-hook 'c-mode-hook (lambda () (c-set-style "k&r")))
 #+end_src
 
 ** GNU APL
@@ -138,7 +147,7 @@
   (use-package go-mode
     :ensure t
     :config
-    (add-hook 'go-mode-hook #'eglot))
+    );(add-hook 'go-mode-hook #'eglot))
 #+end_src
 * PDF Viewing/Editing
 #+begin_src emacs-lisp
@@ -157,3 +166,4 @@
     (setq-default TeX-master nil)
     (prettify-symbols-mode))
 #+end_src
+
