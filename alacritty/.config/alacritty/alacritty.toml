@@ -1,9 +1,10 @@
 # themes from https://github.com/alacritty/alacritty-theme
 
+[general]
 import = ["~/.config/alacritty/themes/themes/zenburn.toml"]
 
-[shell]
-program = "/usr/local/bin/tmux"
+[terminal.shell]
+program = "/usr/bin/tmux"
 #program = "/bin/bash"
 #args = ["-l"]
 
@@ -12,10 +13,10 @@ shape = "Block"
 blinking = "On"
 
 [font]
-size = 14
+size = 11
 
 [font.normal]
-family = "Hack Nerd Font Mono"
+family = "Jetbrains Mono"
 
 [window]
 startup_mode = "Maximized"
