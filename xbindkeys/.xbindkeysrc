@@ -1,0 +1,5 @@
+"amixer sset Master 5%+"
+	Mod4+plus
+
+"amixer sset Master 5%-"
+	Mod4+underscore
